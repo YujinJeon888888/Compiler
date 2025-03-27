@@ -1,2 +1,6 @@
-﻿  STMain.c
-  CompilerVisualStudio.vcxproj -> C:\Users\swu\source\repos\Compiler\x64\Debug\CompilerVisualStudio.exe
+﻿  HT.c
+C:\Users\swu\source\repos\Compiler\CompilerVisualStudio\HT.c(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  STMain.c
+  코드를 생성하고 있습니다...
+STMain.obj : error LNK2005: main이(가) HT.obj에 이미 정의되어 있습니다.
+C:\Users\swu\Documents\GitHub\Compiler\x64\Debug\CompilerVisualStudio.exe : fatal error LNK1169: 여러 번 정의된 기호가 있습니다.
