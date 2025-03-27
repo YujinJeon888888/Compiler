@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CompilerVisualStudio", "Com
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SymbolTableAssignment", "SymbolTableAssignment\SymbolTableAssignment.vcxproj", "{95C0734E-AC8A-4A0F-9BB5-F88D946F4BE5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "STAssignment_SolvingUTFProblem", "STAssignment_SolvingUTFProblem\STAssignment_SolvingUTFProblem.vcxproj", "{73306220-D463-4DFA-A9E1-08E7CBEAB37C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{95C0734E-AC8A-4A0F-9BB5-F88D946F4BE5}.Release|x64.Build.0 = Release|x64
 		{95C0734E-AC8A-4A0F-9BB5-F88D946F4BE5}.Release|x86.ActiveCfg = Release|Win32
 		{95C0734E-AC8A-4A0F-9BB5-F88D946F4BE5}.Release|x86.Build.0 = Release|Win32
+		{73306220-D463-4DFA-A9E1-08E7CBEAB37C}.Debug|x64.ActiveCfg = Debug|x64
+		{73306220-D463-4DFA-A9E1-08E7CBEAB37C}.Debug|x64.Build.0 = Debug|x64
+		{73306220-D463-4DFA-A9E1-08E7CBEAB37C}.Debug|x86.ActiveCfg = Debug|Win32
+		{73306220-D463-4DFA-A9E1-08E7CBEAB37C}.Debug|x86.Build.0 = Debug|Win32
+		{73306220-D463-4DFA-A9E1-08E7CBEAB37C}.Release|x64.ActiveCfg = Release|x64
+		{73306220-D463-4DFA-A9E1-08E7CBEAB37C}.Release|x64.Build.0 = Release|x64
+		{73306220-D463-4DFA-A9E1-08E7CBEAB37C}.Release|x86.ActiveCfg = Release|Win32
+		{73306220-D463-4DFA-A9E1-08E7CBEAB37C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

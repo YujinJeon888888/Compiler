@@ -1,8 +1,8 @@
-/*****************************************************************
+﻿/*****************************************************************
  * \file   main.c
  * \brief 심볼테이블 구현 과제
- * 
- * 
+ *
+ *
  * \author 전유진
  * \date   March 2025
  *********************************************************************/
@@ -19,14 +19,14 @@
 #define FALSE 0
 #define MAX_SYMBOL_LENGTH 15
 #define FILE_BUFFER_SIZE 256
-//고유 아이디 부여하기 위해 전역변수 정의
+ //고유 아이디 부여하기 위해 전역변수 정의
 static int HashNodeID = 100;
 
 /**
  * @brief string 타입 만들기
  * @detail 변수도 []를 변수에 붙이니까 별칭도 []를 별칭에 붙임 (자바랑 헷갈리기x)
  */
-typedef char string[STRING_SIZE];  
+typedef char string[STRING_SIZE];
 
 /**
  * @brief 해시테이블 엔티티.
@@ -43,7 +43,7 @@ typedef struct HTentry {
 /**
  * @brief 심볼 노드.
  */
-typedef struct STEntry{
+typedef struct STEntry {
 	int ID;
 	int StringPoolIndex;
 	int Length;
@@ -76,12 +76,12 @@ int StringLength(string S) {
  */
 int GetHashCode(string String) {
 	int fx = 0;
-	
-	for (int i = 0; i < StringLength(String); i++){
+
+	for (int i = 0; i < StringLength(String); i++) {
 		fx += String[i];
 	}
 
-	return (fx%TABLE_SIZE) + 1;
+	return (fx % TABLE_SIZE) + 1;
 }
 
 /**
@@ -101,7 +101,7 @@ HTpointer LookUpHashTable(int Index, string Symbol) {
 	/*비교작업: 있으면 찾은 항목 반환, 없으면 NULL반환 */
 	while (entry != NULL) {
 		//Symbol과 엔티티 이름이 같은가?
-		if (strcmp(entry->Name, Symbol)==0) {
+		if (strcmp(entry->Name, Symbol) == 0) {
 			return entry;
 		}
 		//옆으로 이동: NULL일때까지
@@ -116,7 +116,7 @@ HTpointer LookUpHashTable(int Index, string Symbol) {
  * @param 심볼
  * @param 심볼의 스트링풀 내 인덱스위치
  */
-void AddHashTable(int HScode,string String ,int StringPoolIndex) {
+void AddHashTable(int HScode, string String, int StringPoolIndex) {
 	//객체 생성
 	HTpointer NewEntry = (HTpointer)malloc(sizeof(HTentry));
 	//메모리할당 실패 예외처리
@@ -125,11 +125,11 @@ void AddHashTable(int HScode,string String ,int StringPoolIndex) {
 		//강종
 		exit(1);
 	}
-	
+
 	//속성채우기
-	NewEntry->Index= StringPoolIndex;
+	NewEntry->Index = StringPoolIndex;
 	NewEntry->ID = HashNodeID++;
-    strcpy(NewEntry->Name, String);
+	strcpy(NewEntry->Name, String);
 	NewEntry->Length = StringLength(String);
 	NewEntry->next = NULL;
 
@@ -157,7 +157,7 @@ void AddHashTable(int HScode,string String ,int StringPoolIndex) {
  * @param 해시테이블
  */
 void SetSymbolTable() {
-	
+
 	/**
 	 * @todo 해시테이블 순회하여, 심볼테이블에 저장.
 	 */
@@ -187,14 +187,14 @@ void PrintSymbolTable() {
 }
 /**
  * @brief 해시테이블 출력.
- * 
+ *
  */
 void PrintHashTable() {
 	printf("%s", "해시테이블-----------------\n");
 	for (int i = 0; i < TABLE_SIZE; i++) {
 		HTpointer entry = HT[i];
-		while(entry != NULL) {
-			printf("해시인덱스(해시코드) - %d (Symbol ID: %d, String Pool Index: %d, String Length: %d)\n", i, entry->ID, entry->Index, entry->Length);			
+		while (entry != NULL) {
+			printf("해시인덱스(해시코드) - %d (Symbol ID: %d, String Pool Index: %d, String Length: %d)\n", i, entry->ID, entry->Index, entry->Length);
 			entry = entry->next;
 			if (entry != NULL) {
 				printf("\t->");
@@ -220,7 +220,7 @@ int IsValidIdentifier(string identifier) {
 			return FALSE;//알파벳, 숫자, _ 외: 비유효
 		}
 	}
-	if (StringLength(identifier)>MAX_SYMBOL_LENGTH) {
+	if (StringLength(identifier) > MAX_SYMBOL_LENGTH) {
 		return FALSE;//길이 15초과: 비유효
 
 	}
@@ -229,7 +229,7 @@ int IsValidIdentifier(string identifier) {
 }
 
 int main() {
-	string Input = {0};
+	string Input = { 0 };
 	char StringPool[STRING_POOL_SIZE] = { 0 };
 	int StringPoolIndex = 0;
 	char buffer[FILE_BUFFER_SIZE];
