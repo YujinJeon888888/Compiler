@@ -20,7 +20,7 @@
 #define MAX_SYMBOL_LENGTH 15
 #define FILE_BUFFER_SIZE 256
 //고유 아이디 부여하기 위해 전역변수 정의
-static int HashNodeID = 100;
+static int HashID = 100;
 
 /**
  * @brief string 타입 만들기
@@ -128,7 +128,7 @@ void AddHashTable(int HScode,string String ,int StringPoolIndex) {
 	
 	//속성채우기
 	NewEntry->Index= StringPoolIndex;
-	NewEntry->ID = HashNodeID++;
+	NewEntry->ID = HashID++;
     strcpy(NewEntry->Name, String);
 	NewEntry->Length = StringLength(String);
 	NewEntry->next = NULL;

@@ -20,8 +20,10 @@
 #define MAX_SYMBOL_LENGTH 15
 #define FILE_BUFFER_SIZE 256
  //고유 아이디 부여하기 위해 전역변수 정의
-static int HashNodeID = 100;
+static int HashID = 100;
 
+//베이스 아이디
+const int BaseID = 100; //해시테이블의 시작 아이디
 /**
  * @brief string 타입 만들기
  * @detail 변수도 []를 변수에 붙이니까 별칭도 []를 별칭에 붙임 (자바랑 헷갈리기x)
@@ -107,6 +109,7 @@ HTpointer LookUpHashTable(int Index, string Symbol) {
 		//옆으로 이동: NULL일때까지
 		entry = entry->next;
 	}
+
 	return NULL;
 }
 
@@ -128,7 +131,7 @@ void AddHashTable(int HScode, string String, int StringPoolIndex) {
 
 	//속성채우기
 	NewEntry->Index = StringPoolIndex;
-	NewEntry->ID = HashNodeID++;
+	NewEntry->ID = HashID++;
 	strcpy(NewEntry->Name, String);
 	NewEntry->Length = StringLength(String);
 	NewEntry->next = NULL;
@@ -161,10 +164,11 @@ void SetSymbolTable() {
 	/**
 	 * @todo 해시테이블 순회하여, 심볼테이블에 저장.
 	 */
-	int STindex = 0;
+	
 	for (int i = 0; i < TABLE_SIZE; i++) {
 		HTpointer entry = HT[i];
 		while (entry != NULL) {
+			int STindex = entry->ID - BaseID;
 			ST[STindex].ID = entry->ID;
 			ST[STindex].StringPoolIndex = entry->Index;
 			ST[STindex].Length = entry->Length;
