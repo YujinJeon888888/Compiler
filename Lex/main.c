@@ -2,13 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//yylex, yytext, . . : 외부에 정의되어있다는 걸 알려줘야함  - extern키워드
+/*yylex, yytext, . . : 외부에 정의되어있다는 걸 알려줘야함  - extern키워드*/
 extern char* yytext;
 extern enum tnumber yylex();
+/*외부선언 함수임을 선언*/
+extern void init_sym_table();
+extern void print_sym_table();
 
 void main()
 {
 	enum EToken ET;  // token number
+	//토큰읽기 전 symbol table을 초기화
+	init_sym_table();
 	printf("  Start of Lex\n");
 	
 	while ((ET = yylex()) != TEOF) {
@@ -33,9 +38,11 @@ void main()
 		case TMULASSIGN:  printf("Token: TMULASSIGN (*=)\n"); break;
 		case TDIVASSIGN:  printf("Token: TDIVASSIGN (/=)\n"); break;
 		case TMODASSIGN:  printf("Token: TMODASSIGN (%%=)\n"); break;
-		case TIDENT:      printf("Token: TIDENT (identifier)\n"); break;
+		case TIDENT:      printf("Token: TIDENT (identifier): %s\n",yytext); break;
 		case TNUMBER:     printf("Token: TNUMBER (number)\n"); break;
 		default:          printf("Unknown token\n"); break;
 		}
 	}
+
+	print_sym_table();
 }

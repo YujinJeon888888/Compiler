@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "tn.h"
+int process_sym_table(char*);
+void print_error(int errno);
 %}
 
 
@@ -29,7 +31,14 @@
 "*="							return(TMULASSIGN);
 "/="							return(TDIVASSIGN);
 "%="							return(TMODASSIGN);
-[A-Za-z_][A-Za-z0-9_]*				return(TIDENT);
+[0-9]+[A-Za-z_][A-Za-z0-9_]*		{ 
+  							print_error(1); 
+    							return(TERROR);
+							}
+[A-Za-z_][A-Za-z0-9_]*			{
+							process_sym_table(yytext);								
+							return(TIDENT);
+							}
 [1-9][0-9]*|0([0-7]+|(x|X)[0-9A-Fa-f]*)?	return(TNUMBER);
 
 "/*"([^*]|\*+[^*/])*\**"*"			;
