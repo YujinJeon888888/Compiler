@@ -18,13 +18,13 @@
     <ClCompile Include="main.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="report_error.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="sym_table_lab.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
     <ClCompile Include="lex.yy.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\과제제출물\과제제출물\report_error.c">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Downloads\과제제출물\과제제출물\sym_table_lab.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

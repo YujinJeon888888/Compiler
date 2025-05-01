@@ -1,48 +1,127 @@
 #include "tn.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-/*yylex, yytext, . . : ø‹∫Œø° ¡§¿«µ«æÓ¿÷¥Ÿ¥¬ ∞… æÀ∑¡¡‡æﬂ«‘  - extern≈∞øˆµÂ*/
+/* yylex, yytext, . . : Ïô∏Î∂ÄÏóê Ï†ïÏùòÎêòÏñ¥ÏûàÎã§Îäî Í±∏ ÏïåÎ†§Ï§òÏïºÌï®  - externÌÇ§ÏõåÎìú */
 extern char* yytext;
-extern enum tnumber yylex();
-/*ø‹∫Œº±æ «‘ºˆ¿”¿ª º±æ*/
+extern enum EToken yylex();
+/* Ïô∏Î∂ÄÏÑ†Ïñ∏ Ìï®ÏàòÏûÑÏùÑ ÏÑ†Ïñ∏ */
 extern void init_sym_table();
 extern void print_sym_table();
 
-void main()
-{
-	enum EToken ET;  // token number
-	//≈‰≈´¿–±‚ ¿¸ symbol table¿ª √ ±‚»≠
-	init_sym_table();
-	printf("  Start of Lex\n");
-	
-	while ((ET = yylex()) != TEOF) {
-		switch (ET) {
-		case TCONST:      printf("Token: TCONST (const)\n"); break;
-		case TELSE:       printf("Token: TELSE (else)\n"); break;
-		case TIF:         printf("Token: TIF (if)\n"); break;
-		case TINT:        printf("Token: TINT (int)\n"); break;
-		case TRETURN:     printf("Token: TRETURN (return)\n"); break;
-		case TVOID:       printf("Token: TVOID (void)\n"); break;
-		case TWHILE:      printf("Token: TWHILE (while)\n"); break;
-		case TEQUAL:      printf("Token: TEQUAL (==)\n"); break;
-		case TNOTEQU:     printf("Token: TNOTEQU (!=)\n"); break;
-		case TLESSE:      printf("Token: TLESSE (<=)\n"); break;
-		case TGREATE:     printf("Token: TGREATE (>=)\n"); break;
-		case TAND:        printf("Token: TAND (&&)\n"); break;
-		case TOR:         printf("Token: TOR (||)\n"); break;
-		case TINC:        printf("Token: TINC (++)\n"); break;
-		case TDEC:        printf("Token: TDEC (--)\n"); break;
-		case TADDASSIGN:  printf("Token: TADDASSIGN (+=)\n"); break;
-		case TSUBASSIGN:  printf("Token: TSUBASSIGN (-=)\n"); break;
-		case TMULASSIGN:  printf("Token: TMULASSIGN (*=)\n"); break;
-		case TDIVASSIGN:  printf("Token: TDIVASSIGN (/=)\n"); break;
-		case TMODASSIGN:  printf("Token: TMODASSIGN (%%=)\n"); break;
-		case TIDENT:      printf("Token: TIDENT (identifier): %s\n",yytext); break;
-		case TNUMBER:     printf("Token: TNUMBER (number)\n"); break;
-		default:          printf("Unknown token\n"); break;
-		}
-	}
+/* Ï†ÑÏó≠ Î≥ÄÏàò */
+int line_number = 1; // ÌòÑÏû¨ ÎùºÏù∏ Î≤àÌò∏
 
-	print_sym_table();
+/* ÌÜ†ÌÅ∞ ÌÉÄÏûÖÏùÑ Î¨∏ÏûêÏó¥Î°ú Î≥ÄÌôò */
+const char* get_token_type(enum EToken token) {
+    switch (token) {
+        case TCONST: return "TCONST";
+        case TELSE: return "TELSE";
+        case TIF: return "TIF";
+        case TINT: return "TINT";
+        case TRETURN: return "TRETURN";
+        case TVOID: return "TVOID";
+        case TWHILE: return "TWHILE";
+        case TEQUAL: return "TEQUAL";
+        case TNOTEQU: return "TNOTEQU";
+        case TLESSE: return "TLESSE";
+        case TGREATE: return "TGREATE";
+        case TAND: return "TAND";
+        case TOR: return "TOR";
+        case TINC: return "TINC";
+        case TDEC: return "TDEC";
+        case TADDASSIGN: return "TADDASSIGN";
+        case TSUBASSIGN: return "TSUBASSIGN";
+        case TMULASSIGN: return "TMULASSIGN";
+        case TDIVASSIGN: return "TDIVASSIGN";
+        case TMODASSIGN: return "TMODASSIGN";
+        case TMULT: return "TMULT";
+        case TPLUS: return "TPLUS";
+        case TMINUS: return "TMINUS";
+        case TASSIGN: return "TASSIGN";
+        case TNOT: return "TNOT";
+        case TLESS: return "TLESS";
+        case TGREATER: return "TGREATER";
+        case TLPAREN: return "TLPAREN";
+        case TRPAREN: return "TRPAREN";
+        case TCOMMA: return "TCOMMA";
+        case TLBRACE: return "TLBRACE";
+        case TRBRACE: return "TRBRACE";
+        case TLBRACKET: return "TLBRACKET";
+        case TRBRACKET: return "TRBRACKET";
+        case TSEMICOLON: return "TSEMICOLON";
+        case TIDENT: return "TIDENT";
+        case TNUMBER: return "TNUMBER";
+        case TOCTAL: return "TOCTAL";
+        case THEX: return "THEX";
+        case TFLOAT: return "TFLOATNUM";
+        case TCHAR: return "TCHAR";
+        case TERROR: return "**Error**";
+        default: return "unknown";
+    }
+}
+
+void print_error_message(const char* message) {
+    printf("Error - Invalid character (%s)\n", message);
+}
+
+void main() {
+    enum EToken ET;
+    int st_index = -1;
+
+    init_sym_table();
+    printf("  Start of Lex\n");
+    printf("%-8s%-12s%-8s%s\n", "Line", "Token type", "ST-index", "Token");
+
+    while ((ET = yylex()) != TEOF) {
+        switch (ET) {
+        case TIDENT:
+            st_index = process_sym_table(yytext);
+            if (st_index == -1) {
+                printf("%-8d%-12s%-8s%s (already exists)\n", line_number, get_token_type(ET), "", yytext);
+            }
+            else {
+                printf("%-8d%-12s%-8d%s\n", line_number, get_token_type(ET), st_index, yytext);
+            }
+            break;
+        case TSTRING:
+        case TNUMBER:
+        case TOCTAL:
+        case THEX:
+        case TFLOAT:
+        case TCHAR:
+        case TSEMICOLON:
+        case TPLUS:
+        case TMINUS:
+        case TASSIGN:
+        case TNOT:
+        case TLESS:
+        case TGREATER:
+        case TLPAREN:
+        case TRPAREN:
+        case TCOMMA:
+        case TLBRACE:
+        case TRBRACE:
+        case TLBRACKET:
+        case TRBRACKET:
+        case TMULT:
+        case TERROR:
+            printf("%-8d%-12s%-8s%s\n", line_number, get_token_type(ET), "", yytext);
+            break;
+
+        default:
+            printf("%-8d%-12s%-8s%s\n", line_number, get_token_type(ET), "", yytext);
+            break;
+        }
+
+        // ÎùºÏù∏ Î≤àÌò∏ Ï¶ùÍ∞Ä Î°úÏßÅ Í∞úÏÑ†
+        for (int i = 0; yytext[i] != '\0'; i++) {
+            if (yytext[i] == '\n') {
+                line_number++;
+            }
+        }
+    }
+
+    print_sym_table();
 }
