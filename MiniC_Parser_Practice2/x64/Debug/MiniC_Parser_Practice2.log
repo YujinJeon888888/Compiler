@@ -1,0 +1,25 @@
+﻿  lex.yy.c
+\lex.yy.c(1027,3): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 '../../../../Downloads/lex.yy.c'을(를) 컴파일하는 중)
+  
+\lex.yy.c(1194,28): warning C4244: '초기화 중': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 '../../../../Downloads/lex.yy.c'을(를) 컴파일하는 중)
+  
+\lex.yy.c(1381,41): warning C4996: 'fileno': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _fileno. See online help for details.
+  (소스 파일 '../../../../Downloads/lex.yy.c'을(를) 컴파일하는 중)
+  
+\lex.yy.c(1575,2): warning C4013: 'exit'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  (소스 파일 '../../../../Downloads/lex.yy.c'을(를) 컴파일하는 중)
+  
+  parser_tab.c
+\bison.simple(377,16): warning C4013: 'yylex'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  (소스 파일 '../../../../Downloads/parser_tab.c'을(를) 컴파일하는 중)
+  
+\bison.simple(289,31): warning C4244: '초기화 중': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 '../../../../Downloads/parser_tab.c'을(를) 컴파일하는 중)
+  
+\parser.y(126,25): warning C4028: 정식 매개 변수 1이(가) 선언과 다릅니다.
+  (소스 파일 '../../../../Downloads/parser_tab.c'을(를) 컴파일하는 중)
+  
+  코드를 생성하고 있습니다...
+  MiniC_Parser_Practice2.vcxproj -> C:\Users\swu\Documents\GitHub\Compiler\x64\Debug\MiniC_Parser_Practice2.exe

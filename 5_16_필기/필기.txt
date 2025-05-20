@@ -1,0 +1,137 @@
+<헤더파일>
+.l파일의 인클루드를 cal_tab.h로 바꾸고 bison.exe -d parser.y를 실행해 헤더파일 생성 후 프로젝트 헤더폴더에 넣어주기
+
+<.output파일에서 146번째에서 문제생겼다고 한 상황>
+* 올려주신 .y파일에 대해 bison -v parser.y하면 parser.output파일 생김. 
+*.output파일은 왜 에러났는지 설명하는 파일이다. 이걸 보고 해결하면 된다. 
+
+ 
+원인 = 146번째 state 에 대해 reduce할지 shift할지 헷갈리는 상황
+
+이 구문오류를 고쳐보자.
+
+if_st 			: tif '(' expression ')' statement 	%prec tlowerthanelse {semantic(49);}
+			| tif '(' expression ')' statement telse statement 	{semantic(50);};
+
+여기서 둘 중에 헷갈리는 상황이다. 
+
+
+%nonassoc tlowerthanelse
+%nonassoc telse
+를 parser.y에 넣어줘서 해결하자(우선순위로써 해결: 아랫순위를 더 우선순위높게)
+
+tlowerthanelse라는 가상터미널 :
+=>if_st 			: tif '(' expression ')' statement 	%prec tlowerthanelse {semantic(49);}
+//%prec 통해 가상터미널 처리.
+
+<...\x64\Debug 폴더 위치에 prime.mc 넣어주기>
+교수님이 올려주신 zip파일 안에 있음.
+
+<빌드하면 뜨는 오류들>
+int yyerror(const char* s){
+	printf("%s\n", s);
+	return -1;
+}
+
+int main(void){
+
+	return yyparse();
+}
+
+를 parser.y밑에 달아주기
+
+#include <stdio.h>
+#include <ctype.h>
+#include <malloc.h>
+를 parser_tab.h 밑에 달아주기
+
+
+int yyerror(const char* s);
+#include <stdlib.h>
+를 parser.y 선언부에 달아주기
+
+<다음으로 할 일>
+project경로의 x64 들어가서 debug들어가기
+cmd 치고, 
+ex) MiniC_Parser_Practice2.exe < prime.mc
+하기
+
+<해결방법2>
+우선순위 외 해결방법은 ;끝에 붙이던 사례처럼, 끝에 뭔가를 붙여주는거다.
+
+1. teif를 %token tident tnumber tconst telse tif  teif tint treturn tvoid twhile에 삽입
+2. if_st구문에 가서 statement뒤에 teif를 붙이도록 하기.
+
+<prime.mc란?>
+c소스코드처럼 작성하는 공간
+
+코드를 작성해 테스트해보는 공간이다(여기서 쓴 것에 대해 구문분석 잘 되는지)
+
+<external_dcl란?>
+함수에대한 definition들어가있거나, declaration 부분임. 
+
+
+<function_def란?>
+함수헤더들어가고, compound_st들어감
+ 
+<function_header란?>
+dcl_spec function_name formal_param
+: 함수 선언 형식임.
+
+dcl_spec = 리턴타입
+
+여기에는 tint, tvoid, tconst들어감
+
+tconst는 type_qualifer, tvoid 및 tint는 type_specifier로 매핑되는데, 
+콘스트랑 다른거랑 결합이 되기때문에(const int, const char 이런식으로) 이렇게 나눈것임
+
+함수이름인 function_name에는 tident로.
+
+formal_param: 파라미터들어가는 곳인데, 괄호로 묶여있으므로 이렇게. 그리고 여러개 파라미터 리스트 들어갈수있으므로 여러개 콤마로 들어갈수있게 이렇게 처리
+formal_param 		: '(' opt_formal_param ')' 		{semantic(17);};
+opt_formal_param 	: formal_param_list			{semantic(18);}
+		   	|					{semantic(19);};
+formal_param_list 	: param_dcl				{semantic(20);}
+		    	| formal_param_list ',' param_dcl 	{semantic(21);};
+
+
+compound_st :함수 본문 들어가는 곳
+여기서는 선언도 할 수 있고, 그 외 다양한 statement가 들어갈 수 있음. 
+
+init_declarator에는 그냥 선언만할수도있고, 초기화와함꼐 선언할수도 있으므로 그게 들어가있음: 
+init_declarator 	: declarator					{semantic(31);}
+		 	| declarator '=' tnumber		{semantic(32);};
+
+그 외도 쭉 읽어보기.
+
+statement에는 뭐가들어가냐면, compound_st, 
+expression_st....
+들어감.
+
+각각 그에 대한 구문은 다 아래를 읽어보면 알 수 있음. 
+
+expression에는 cal실습 때 했던것처럼 =, +, /, ..연산자 쭉 들어가있음.
+비교, 관계, 산술, .. 연산자 들어감.
+
+<결론>
+이렇게 해석하면 됨
+
+<정상실행될 경우>
+reduced rule number = 13
+reduced rule number = 11
+reduced rule number = 9
+reduced rule number = 14
+reduced rule number = 12
+reduced rule number = 10
+reduced rule number = 8
+reduced rule number
+....
+
+이런게 쭉 뜸
+
+마지막에 number =1로 끝남 (시작심볼로 되돌아왔다는 의미)
+= 정상해석
+
+<파일분리버전>
+교수님이 올려주신 zip파일
+
