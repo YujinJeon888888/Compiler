@@ -1,0 +1,16 @@
+영상대로 따라하기.
+
+✅터미널심볼을 토큰으로 바꾸기
+✅tn.h대신 parser_tab.h를 쓰기
+✅main.c에서 yyparse()넣기 //안 쓰는 코드 지우고: 영상확인
+✅토큰타입 사용 안 하는 곳에서는 굳이 include하지 말기
+✅void update_sym_table(int id_index, int attr_num, int attr_value); 를 구현하기.
+: 실습 따라하기
+	parser.y에서는 
+		extern처리해서 함수 쓸 수 있게 해주기.
+		int current_type;을 선언하기
+		extern int st_index; //외부에 이미 선언 되어있음
+		함수 이름에 대해
+			함수타입들에 대해 액션코드-> current_type = 0 .. 이런식으로 코드 덧대주기. 
+			기타 ... 하고(update_sym_table함수에 들어갈 인자 업데이트), funtion_header에 대해, 
+			액션코드를 update_sym_table함수 호출하기

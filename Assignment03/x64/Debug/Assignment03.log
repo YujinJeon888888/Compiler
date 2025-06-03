@@ -1,0 +1,42 @@
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(520,5): warning MSB8004: Output 디렉터리가 슬래시로 끝나지 않습니다. Output 디렉터리의 적절한 평가를 허용하는 데 필요하므로 이 빌드 인스턴스에서 슬래시를 추가합니다.
+  lex.yy.c
+\MiniC.l(45,12): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\MiniC.l(48,31): warning C4047: '함수': 'int *(__cdecl *)()'의 간접 참조 수준이 'int'과(와) 다릅니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\MiniC.l(48,31): warning C4024: 'print_error': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\MiniC.l(70,13): warning C4047: '함수': 'int *(__cdecl *)()'의 간접 참조 수준이 'int'과(와) 다릅니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\MiniC.l(70,13): warning C4024: 'print_error': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\lex.yy.c(1194,3): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\lex.yy.c(1361,28): warning C4244: '초기화 중': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\lex.yy.c(1548,41): warning C4996: 'fileno': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _fileno. See online help for details.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+  parser_tab.c
+\bison.simple(317,4): warning C4013: 'yyerror'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  (소스 파일 'parser_tab.c'을(를) 컴파일하는 중)
+  
+\bison.simple(377,16): warning C4013: 'yylex'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  (소스 파일 'parser_tab.c'을(를) 컴파일하는 중)
+  
+\bison.simple(289,31): warning C4244: '초기화 중': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'parser_tab.c'을(를) 컴파일하는 중)
+  
+  sym_table_lab.c
+C:\Users\swu\Documents\GitHub\Compiler\Assignment03\sym_table_lab.c(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\Users\swu\Documents\GitHub\Compiler\Assignment03\sym_table_lab.c(163,20): warning C4267: '+=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\swu\Documents\GitHub\Compiler\Assignment03\sym_table_lab.c(144,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  코드를 생성하고 있습니다...
+  Assignment03.vcxproj -> C:\Users\swu\Documents\GitHub\Compiler\Assignment03\x64\Debug\Assignment03.exe

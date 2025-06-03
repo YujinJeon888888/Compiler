@@ -1,8 +1,40 @@
 ﻿  report_error.c
   sym_table_lab.c
+  lex.yy.c
+\Downloads\과제제출물\과제제출물\report_error.c(1,1): error C1083: 소스 파일을 열 수 없습니다. '..\..\..\..\Downloads\과제제출물\과제제출물\report_error.c': No such file or directory
+  (소스 파일 '/Downloads/과제제출물/과제제출물/report_error.c'을(를) 컴파일하는 중)
+  
+\Downloads\과제제출물\과제제출물\sym_table_lab.c(1,1): error C1083: 소스 파일을 열 수 없습니다. '..\..\..\..\Downloads\과제제출물\과제제출물\sym_table_lab.c': No such file or directory
+  (소스 파일 '/Downloads/과제제출물/과제제출물/sym_table_lab.c'을(를) 컴파일하는 중)
+  
+\scanner.l(62,14): warning C4047: '함수': 'int *(__cdecl *)()'의 간접 참조 수준이 'int'과(와) 다릅니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\scanner.l(62,14): warning C4024: 'print_error': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\scanner.l(67,14): warning C4047: '함수': 'int *(__cdecl *)()'의 간접 참조 수준이 'int'과(와) 다릅니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\scanner.l(67,14): warning C4024: 'print_error': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\scanner.l(87,14): warning C4047: '함수': 'int *(__cdecl *)()'의 간접 참조 수준이 'int'과(와) 다릅니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\scanner.l(87,14): warning C4024: 'print_error': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\lex.yy.c(1234,3): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\lex.yy.c(1401,28): warning C4244: '초기화 중': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
+\lex.yy.c(1588,41): warning C4996: 'fileno': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _fileno. See online help for details.
+  (소스 파일 'lex.yy.c'을(를) 컴파일하는 중)
+  
   main.c
-C:\Users\swu\Downloads\과제제출물\과제제출물\sym_table_lab.c(169,20): warning C4267: '+=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\swu\Downloads\과제제출물\과제제출물\sym_table_lab.c(148,5): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\swu\Documents\GitHub\Compiler\Lex\main.c(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\Users\swu\Documents\GitHub\Compiler\Lex\main.c(80,24): warning C4013: 'process_sym_table'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
   코드를 생성하고 있습니다...
-  Lex.vcxproj -> C:\Users\swu\Documents\GitHub\Compiler\x64\Debug\Lex.exe

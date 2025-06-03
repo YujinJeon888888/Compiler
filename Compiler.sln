@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YACC_Practice", "YACC_Pract
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MiniC_Parser_Practice2", "MiniC_Parser_Practice2\MiniC_Parser_Practice2.vcxproj", "{A03D5EB4-E462-4C42-8EDB-ACC891747824}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment03", "Assignment03\Assignment03.vcxproj", "{404EBA10-7ACF-4428-9FF2-3264F3113E80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +73,14 @@ Global
 		{A03D5EB4-E462-4C42-8EDB-ACC891747824}.Release|x64.Build.0 = Release|x64
 		{A03D5EB4-E462-4C42-8EDB-ACC891747824}.Release|x86.ActiveCfg = Release|Win32
 		{A03D5EB4-E462-4C42-8EDB-ACC891747824}.Release|x86.Build.0 = Release|Win32
+		{404EBA10-7ACF-4428-9FF2-3264F3113E80}.Debug|x64.ActiveCfg = Debug|x64
+		{404EBA10-7ACF-4428-9FF2-3264F3113E80}.Debug|x64.Build.0 = Debug|x64
+		{404EBA10-7ACF-4428-9FF2-3264F3113E80}.Debug|x86.ActiveCfg = Debug|Win32
+		{404EBA10-7ACF-4428-9FF2-3264F3113E80}.Debug|x86.Build.0 = Debug|Win32
+		{404EBA10-7ACF-4428-9FF2-3264F3113E80}.Release|x64.ActiveCfg = Release|x64
+		{404EBA10-7ACF-4428-9FF2-3264F3113E80}.Release|x64.Build.0 = Release|x64
+		{404EBA10-7ACF-4428-9FF2-3264F3113E80}.Release|x86.ActiveCfg = Release|Win32
+		{404EBA10-7ACF-4428-9FF2-3264F3113E80}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
