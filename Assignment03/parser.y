@@ -29,22 +29,25 @@ translation_unit 	: external_dcl					{semantic(2);}
 external_dcl 		: function_def					{semantic(4);}
 		  	| declaration					{semantic(5);};
 function_def 		: function_header compound_st		{semantic(6);};
-function_header 	: dcl_spec function_name formal_param	{update_sym_table(st_index, 0, current_type); semantic(7);};
+function_header : dcl_spec function_name { int func_index = st_index; update_return_type(func_index, current_type); } formal_param { semantic(7); };
 dcl_spec 		: dcl_specifiers				{semantic(8);};
 dcl_specifiers 		: dcl_specifier					{semantic(9);}
 		 	| dcl_specifiers dcl_specifier			{semantic(10);};
 dcl_specifier 		: type_qualifier					{semantic(11);}
 			| type_specifier				{semantic(12);};
 type_qualifier 		: TCONST					{semantic(13);};
-type_specifier 		: TINT						{current_type = 0; semantic(14);}
-		 	| TVOID						{current_type = 1; semantic(15);};
-function_name 	: TIDENT						{semantic(16);};
+type_specifier 		: TINT        { current_type = 0; semantic(14); }
+               | TFLOATNUM   { current_type = 1; semantic(15); }
+               | TCHAR       { current_type = 2; semantic(16); }
+               | TVOID       { current_type = 3; semantic(17); }
+               ;
+function_name 	: TIDENT						{semantic(16);update_func_name(st_index, 1);};
 formal_param 		: TLPAREN opt_formal_param TRPAREN 			{semantic(17);};
 opt_formal_param 	: formal_param_list				{semantic(18);}
-		   	|						{semantic(19);};
+		   	|						{semantic(19);update_param_type(st_index, 3);};
 formal_param_list 	: param_dcl					{semantic(20);}
 		    	| formal_param_list TCOMMA param_dcl 		{semantic(21);};
-param_dcl 		: dcl_spec declaraTOR				{semantic(22);};
+param_dcl 		: dcl_spec declaraTOR				{semantic(22);update_param_type(st_index, current_type);};
 compound_st 		: TLBRACE opt_dcl_list opt_stat_list TRBRACE 		{semantic(23);};
 opt_dcl_list 		: declaration_list				{semantic(24);}
 			|						{semantic(25);};
@@ -55,7 +58,7 @@ init_dcl_list 		: init_declaraTOR				{semantic(29);}
 			| init_dcl_list TCOMMA init_declaraTOR 		{semantic(30);};
 init_declaraTOR 	: declaraTOR						{semantic(31);}
 		 	| declaraTOR TASSIGN TNUMBER			{semantic(32);};
-declaraTOR 		: TIDENT						{semantic(33);}
+declaraTOR 		: TIDENT						{semantic(33); update_attr_type(st_index, current_type);}
 	     		| TIDENT TLSQUARE opt_number TRSQUARE			{semantic(34);};
 opt_number 		: TNUMBER					{semantic(35);}
 	     		|						{semantic(36);};

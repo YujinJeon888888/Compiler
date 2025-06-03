@@ -7,6 +7,9 @@ int process_sym_table(char*);
 void print_error(int errno);
 extern int line_num;
 int st_index = 0;
+
+//라인넘버 업데이트 함수 
+void update_line_number(int, int);
 %}
 %%
 "!"								return(TNOT);
@@ -49,6 +52,7 @@ int st_index = 0;
        												return TERROR;
     											} else {
         											st_index = process_sym_table(yytext);
+                                                    update_line_number(st_index, line_num);
         											return TIDENT;
    	 										}	
 										}

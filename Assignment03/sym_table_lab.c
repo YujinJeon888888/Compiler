@@ -8,9 +8,20 @@
 #define STR_POOL_SIZE   1000
 char separators[] = " ,;\t\n\r\n";
 char str_pool[STR_POOL_SIZE];
-int sym_table[SYM_TABLE_SIZE][3];
+
+// 기존 3열에 추가적으로 5개의 열을 추가합니다.
+#define ADDITIONAL_COLUMNS 5
+#define TOTAL_COLUMNS (2 + ADDITIONAL_COLUMNS)
+
+int sym_table[SYM_TABLE_SIZE][TOTAL_COLUMNS];
 int index_start = 0;
 int sym_table_index = 0;
+
+const char* getTypeName(int typeCode);
+const char* getFuncName(int flagCode);
+const char* getParamTypeName(int typeCode);
+const char* getReturnTypeName(int typeCode);
+
 
 #define isLetter(x) ( ((x) >= 'a' && (x) <='z') || ((x) >= 'A' && (x) <= 'Z') || ((x) == '_')) 
 #define isDigit(x) ( (x) >= '0' && (x) <= '9' )
@@ -64,11 +75,11 @@ int foldingMethod(char* key, int tableSize) {
     return fold % tableSize;
 }
 void init_sym_table() {
-    int i;
+    int i, j;
     for (i = 0; i < SYM_TABLE_SIZE; i++) {
-        sym_table[i][0] = -1;
-        sym_table[i][1] = -1;
-        sym_table[i][2] = -1;
+        for (j = 0; j < TOTAL_COLUMNS; j++) {
+            sym_table[i][j] = -1;
+        }
     }
 }
 
@@ -79,10 +90,24 @@ void update_sym_table(int id_index, int attr_num, int attr_value) {
 void print_sym_table() {
     int i;
     printf("\nSymbol Table\n");
-    printf("ID\tIndex\tLength\tSymbol\tAttributes\n");
+    // 변경 전 헤더: "ID\tIndex\tLength\tSymbol\tAttributes\tAttrType\tFuncName\tParamType\tReturnType\tLineNum\n"
+    printf("ID\tIndex\tLength\tSymbol\tAttrType\tFuncName\tParamType\tReturnType\tLineNum\n");
     for (i = 0; i < SYM_TABLE_SIZE; i++) {
         if (sym_table[i][0] != -1) {
-            printf("%d\t%d\t%d\t%s\t%d\n", i + 1, sym_table[i][0], sym_table[i][1], str_pool + sym_table[i][0], sym_table[i][2]);
+            printf("%d\t", i + 1);
+            printf("%d\t", sym_table[i][0]);
+            printf("%d\t", sym_table[i][1]);
+            printf("%s\t", str_pool + sym_table[i][0]);
+            // 변경 전 출력: sym_table[i][2] : Attributes, sym_table[i][3] ~ [7] : 나머지 열
+            // 변경 후: [2]: AttrType, [3]: FuncName, [4]: ParamType, [5]: ReturnType, [6]: LineNum
+            printf("%s\t", getTypeName(sym_table[i][2]));
+            printf("%s\t", getFuncName(sym_table[i][3]));
+            printf("%s\t", getParamTypeName(sym_table[i][4]));
+            if (strcmp(getFuncName(sym_table[i][3]), "function") == 0)
+                printf("%s\t", getReturnTypeName(sym_table[i][5]));
+            else
+                printf("-\t");
+            printf("%d\n", sym_table[i][6]);
         }
     }
 }
@@ -164,4 +189,78 @@ int process_sym_table(char* identifier) {
     str_pool[index_start++] = '\0';
 
     return result;
+}
+
+// AttrType 업데이트 (새 열번호: 2)
+void update_attr_type(int id_index, int attrType_value) {
+    if (sym_table[id_index - 1][2] == -1) {
+        sym_table[id_index - 1][2] = attrType_value;
+    }
+}
+
+// 함수이름 업데이트 (새 열번호: 3)
+void update_func_name(int id_index, int funcName_value) {
+    if (sym_table[id_index - 1][3] == -1) {
+        sym_table[id_index - 1][3] = funcName_value;
+    }
+}
+
+// 함수 파라미터 타입 업데이트 (새 열번호: 4)
+void update_param_type(int id_index, int paramType_value) {
+    if (sym_table[id_index - 1][4] == -1) {
+        sym_table[id_index - 1][4] = paramType_value;
+    }
+}
+
+// 함수반환타입 업데이트 (새 열번호: 5)
+void update_return_type(int id_index, int returnType_value) {
+    if (sym_table[id_index - 1][5] == -1) {
+        sym_table[id_index - 1][5] = returnType_value;
+    }
+}
+
+// 라인넘버 업데이트 (새 열번호: 6)
+// 만약 해당 심볼의 라인넘버가 -1이면만 업데이트(초반에만 업데이트)
+void update_line_number(int id_index, int lineNumber_value) {
+    if (sym_table[id_index - 1][6] == -1) {
+        sym_table[id_index - 1][6] = lineNumber_value;
+    }
+}
+
+const char* getFuncName(int flagCode) {
+    switch (flagCode) {
+    case 1: return "function";
+    default: return "unknown";
+    }
+}
+
+
+const char* getTypeName(int typeCode) {
+    switch (typeCode) {
+    case 0: return "int";
+    case 1: return "float";
+    case 2: return "char";
+    case 3: return "void";
+    default: return "unknown";
+    }
+}
+
+const char* getParamTypeName(int typeCode) {
+    switch (typeCode) {
+    case 0: return "int";
+    case 1: return "float";
+    case 2: return "char";
+    case 3: return "void";
+    default: return "unknown";
+    }
+}
+
+const char* getReturnTypeName(int typeCode) {
+    switch (typeCode) {
+    case 0: return "int";
+    case 1: return "float";
+    case 2: return "char";
+    case 3: return "void";
+    default: return "unknown";
+    }
 }

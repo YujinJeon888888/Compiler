@@ -455,7 +455,10 @@ int process_sym_table(char*);
 void print_error(int errno);
 extern int line_num;
 int st_index = 0;
-#line 459 "lex.yy.c"
+
+//라인넘버 업데이트 함수 
+void update_line_number(int, int);
+#line 462 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -606,9 +609,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 11 "MiniC.l"
+#line 14 "MiniC.l"
 
-#line 612 "lex.yy.c"
+#line 615 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -693,268 +696,269 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 12 "MiniC.l"
+#line 15 "MiniC.l"
 return(TNOT);
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 13 "MiniC.l"
+#line 16 "MiniC.l"
 return(TPLUS);
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 14 "MiniC.l"
+#line 17 "MiniC.l"
 return(TMINUS);
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 15 "MiniC.l"
+#line 18 "MiniC.l"
 return(TMUL);
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 16 "MiniC.l"
+#line 19 "MiniC.l"
 return(TDIV);
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 17 "MiniC.l"
+#line 20 "MiniC.l"
 return(TMOD);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 18 "MiniC.l"
+#line 21 "MiniC.l"
 return(TCONST);
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 19 "MiniC.l"
+#line 22 "MiniC.l"
 return(TELSE);
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 20 "MiniC.l"
+#line 23 "MiniC.l"
 return(TIF);
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 21 "MiniC.l"
+#line 24 "MiniC.l"
 return(TEIF);
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 22 "MiniC.l"
+#line 25 "MiniC.l"
 return(TINT);
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 23 "MiniC.l"
+#line 26 "MiniC.l"
 return(TCHAR);
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 24 "MiniC.l"
+#line 27 "MiniC.l"
 return(TFLOAT);
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 25 "MiniC.l"
+#line 28 "MiniC.l"
 return(TRETURN);
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 26 "MiniC.l"
+#line 29 "MiniC.l"
 return(TVOID);
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 27 "MiniC.l"
+#line 30 "MiniC.l"
 return(TWHILE);
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 28 "MiniC.l"
+#line 31 "MiniC.l"
 return(TEQUAL);
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 29 "MiniC.l"
+#line 32 "MiniC.l"
 return(TNOTEQU);
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 30 "MiniC.l"
+#line 33 "MiniC.l"
 return(TLESS);
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 31 "MiniC.l"
+#line 34 "MiniC.l"
 return(TGREAT);
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 32 "MiniC.l"
+#line 35 "MiniC.l"
 return(TLESSE);
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 33 "MiniC.l"
+#line 36 "MiniC.l"
 return(TGREATE);
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 34 "MiniC.l"
+#line 37 "MiniC.l"
 return(TAND);
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 35 "MiniC.l"
+#line 38 "MiniC.l"
 return(TOR);
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 36 "MiniC.l"
+#line 39 "MiniC.l"
 return(TINC);
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 37 "MiniC.l"
+#line 40 "MiniC.l"
 return(TDEC);
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 38 "MiniC.l"
+#line 41 "MiniC.l"
 return(TASSIGN);
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 39 "MiniC.l"
+#line 42 "MiniC.l"
 return(TADDASSIGN);
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 40 "MiniC.l"
+#line 43 "MiniC.l"
 return(TSUBASSIGN);
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 41 "MiniC.l"
+#line 44 "MiniC.l"
 return(TMULASSIGN);
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 42 "MiniC.l"
+#line 45 "MiniC.l"
 return(TDIVASSIGN);
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 43 "MiniC.l"
+#line 46 "MiniC.l"
 return(TMODASSIGN);
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 44 "MiniC.l"
+#line 47 "MiniC.l"
 { yylval = atoi(yytext);   return TNUMBER; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 45 "MiniC.l"
+#line 48 "MiniC.l"
 { yylval = atof(yytext);   return TNUMBER; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 46 "MiniC.l"
+#line 49 "MiniC.l"
 {
    											 if (yyleng > 15) {
       												print_error(2);
        												return TERROR;
     											} else {
         											st_index = process_sym_table(yytext);
+                                                    update_line_number(st_index, line_num);
         											return TIDENT;
    	 										}	
 										}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 56 "MiniC.l"
+#line 60 "MiniC.l"
 return(TSTRING);
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 57 "MiniC.l"
+#line 61 "MiniC.l"
 for(int i=0;i<yyleng;i++) { if(yytext[i] == '\n') line_num++; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 58 "MiniC.l"
+#line 62 "MiniC.l"
 ;
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 59 "MiniC.l"
+#line 63 "MiniC.l"
 ;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 60 "MiniC.l"
+#line 64 "MiniC.l"
 line_num++;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 61 "MiniC.l"
+#line 65 "MiniC.l"
 return TLPAREN;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 62 "MiniC.l"
+#line 66 "MiniC.l"
 return TRPAREN;
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 63 "MiniC.l"
+#line 67 "MiniC.l"
 return TLBRACE;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 64 "MiniC.l"
+#line 68 "MiniC.l"
 return TRBRACE;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 65 "MiniC.l"
+#line 69 "MiniC.l"
 return TLSQUARE;
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 66 "MiniC.l"
+#line 70 "MiniC.l"
 return TRSQUARE;
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 67 "MiniC.l"
+#line 71 "MiniC.l"
 return TCOMMA;
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 68 "MiniC.l"
+#line 72 "MiniC.l"
 return TDOT;
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 69 "MiniC.l"
+#line 73 "MiniC.l"
 return TSEMI;
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 70 "MiniC.l"
+#line 74 "MiniC.l"
 print_error(3);
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 71 "MiniC.l"
+#line 75 "MiniC.l"
 ECHO;
 	YY_BREAK
-#line 958 "lex.yy.c"
+#line 962 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1840,7 +1844,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 71 "MiniC.l"
+#line 75 "MiniC.l"
 
 
 int yywrap() {
